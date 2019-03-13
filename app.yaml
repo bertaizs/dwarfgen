@@ -1,0 +1,5 @@
+runtime: php55
+api_version: 1
+
+- url: /(.+\.(html|js|jpg|png))$
+  static_files: \1
