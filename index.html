@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>dwarf name generator</title>
+		
+		<script src="dwarf.js"></script>
+		<script src="namegen.js"></script>
+		<script>
+			function gen() {
+				console.log('gen');
+				var name = randomName();
+//				document.write( '<p>'+ name +'</p>' );
+document.getElementById('output').innerHTML = '<p>'+ name +'</p>' + document.getElementById('output').innerHTML;
+			}
+		</script>
+
+	</head>
+<body>
+	Dwarf name generator | 
+	<input type="button" value="give me a dwarven name!" onclick="gen();"/>
+	<hr/>
+
+	<div id='output'></div>
+	<script>
+		gen();
+	</script>	
+</body>
+</html>
