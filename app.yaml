@@ -1,5 +1,11 @@
 runtime: php55
 api_version: 1
 
+handlers:
+- url: /
+  static_files: index.html
+  upload: index.html
+
 - url: /(.+\.(html|js|jpg|png))$
   static_files: \1
+  upload: (.+\.(html|js|jpg|png))$
