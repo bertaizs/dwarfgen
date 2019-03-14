@@ -4,8 +4,8 @@
 		<meta charset="utf-8">
 		<title>dwarf name generator</title>
 		
-		<script src="dwarf.js"></script>
 		<script src="namegen.js"></script>
+		<script src="dwarf.js"></script>
 		<script>
 			function gen() {
 				console.log('gen');
@@ -23,6 +23,8 @@ document.getElementById('output').innerHTML = '<p>'+ name +'</p>' + document.get
 
 	<div id='output'></div>
 	<script>
+		namegen.grammar = grammar;
+		
 		gen();
 	</script>	
 </body>
