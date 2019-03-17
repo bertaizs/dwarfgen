@@ -72,12 +72,12 @@ namegen.process = function( str, grammar ) {
 		return str;	// if not, returns str as is
 	
 	// otherwise executes one random transformation, call process on the resulting string and return the result
-	return t[1] + this.process( this.pickOne(grammar[ t[2].toLocaleLowerCase() ], t[2])+ t[3], this.grammar ); 
+	return t[1] + this.process( this.pickOne(grammar[ t[2].toLocaleLowerCase() ], t[2])+ t[3], grammar ); 
 }
 
 // default entry point
 function randomName() {
-	return namegen.process( '{/}', grammar );
+	return namegen.process( '{/}', namegen.grammar );
 }
 
 

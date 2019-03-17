@@ -7,23 +7,101 @@
 		<script src="namegen.js"></script>
 		<script src="dwarf.js"></script>
 		<script>
+			// generates a dwarven name :)
 			function gen() {
-				console.log('gen');
 				var name = randomName();
-//				document.write( '<p>'+ name +'</p>' );
-document.getElementById('output').innerHTML = '<p>'+ name +'</p>' + document.getElementById('output').innerHTML;
+				document.getElementById('output').innerHTML = '<p>'+ name +'</p>' + document.getElementById('output').innerHTML;
+			}
+			
+			// resets the grammer to be used as per dwarf.js
+			function defaultGrammar() {
+				document.getElementById('grammar').value = JSON.stringify(grammar, null, 2);
+				namegen.grammar = grammar;
+			}
+
+			// parses the textrea 'grammar' for JSON, and tells the name generator to use it for generating names
+			function readGrammar() {
+				try {
+					var json = JSON.parse(document.getElementById('grammar').value);
+					namegen.grammar = json;
+					alert("thanks, let me use your grammar!")
+				} catch( e ) {
+					alert("invalid JSON format :()");
+				}
+			}
+			
+			// show or hides the textarea and the controls for defining custom grammars
+			function showHide() {
+				if( document.getElementById('generator').style.visibility == 'hidden' ) {
+					document.getElementById('generator').style.visibility = 'visible'; 
+					document.getElementById('showhide').value='simple mode';
+				}
+				else {
+					document.getElementById('generator').style.visibility = 'hidden'; 
+					document.getElementById('showhide').value='advanced mode';
+				}
 			}
 		</script>
 
 	</head>
 <body>
-	Dwarf name generator | 
-	<input type="button" value="give me a dwarven name!" onclick="gen();"/>
+	<h1>Dwarf name generator</h1>
+		
+	<p>
+		In case you ever get into the situation where you <i>desperately</i> need to 
+		generate dwarven names en mass, this is the right tool for you.
+		The tool uses a simple <a href="dwarf.js">grammar</a> template for generating names, 
+		we <a href="https://tvtropes.org/pmwiki/pmwiki.php/Main/LukeNounverber">know the rules</a>
+		of how dwarf names work.
+		You can also modify the grammar to work as custom name generator.
+	</p>
+	
+	<p>Good luck & have fun generating lots of dwarven names! ROCK-AND-STONE!</p>
+	<input type="button" value="give me a random name!" onclick="gen();"/>
 	<hr/>
 
-	<div id='output'></div>
+	<div id='output'>&nbsp;<br/></div>
+	
+	<hr/>
+	
+	<input type="button" onclick="document.getElementById('output').innerHTML = '&nbsp;<br/>';" value="clear output" id="clear">
+	<input type="button" onclick="showHide();" value="advanced mode" id="showhide">
+	<div id="generator" style="visibility: hidden;"><br/>
+		The below grammar (describes as JSON code) describes the ruleset of how 
+		the names are generated:
+		
+		<textarea id="grammar" cols=80 rows=20></textarea>
+		<br/>
+		<input type="button" onclick="defaultGrammar();" value="default dwarf mode">
+		<input type="button" onclick="readGrammar();" value="use above grammar">
+
+
+		<p>Examples:</p>
+		<p>
+			The following JSON will always return the name <i>Bruenor</i>.
+			<pre>{ "/": { "Bruenor": 1 } }</pre>
+		</p>
+		
+		<p>
+			The following JSON will can produce <i>Bruenor</i> or <i>Gimli, son of Bruenor</i> or <i>Gimli, son of Gimli, son of Bruenor</i>, etc. with potentially an infinite amount of Gimlis in the line.
+			<pre>{ "/": { "Bruenor": 2, "Gimli, son of {/}": 1 } }</pre>
+		</p>
+		
+		<p>
+			You may want to generate names of pointed-eared elves, whose first names start with 'e' and the surnames consists of a celestial body and a weapon (with a heavy bias towards ranged weapons, of course).
+			<pre>{ 
+  "/": { "E{first} {Celestial}{weapon}": 1},
+  "celestial": {"Sun": 1, "Moon": 2, "Star": 1},
+  "weapon": {"sword": 1, "bow": 2, "arrow": 2, "spear": 1},
+  "first": {"gon": 1, "lgondol": 1, "losh": 1, "lwar": 1}
+}</pre>
+		</p>
+		
+	</div>
+	
 	<script>
-		namegen.grammar = grammar;
+		defaultGrammar();
+
 		
 		gen();
 	</script>	
