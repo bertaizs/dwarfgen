@@ -4,15 +4,14 @@
 var grammar = {};
 
 grammar['/'] = {
-//	'{word}': 100,
 	'{name}': 1000,
 	'{name}, son of {Dwarfname}': 100,
 	'{Dwarfname}, {epithet}': 100,
 }
 
 grammar['name'] = {
-	'{Dwarfname}': 100,
-//	'{Dwarfname}, the {Adjective}': 100,
+	'{Dwarfname}': 1000,
+	'{Dwarfname}, the {Adjective}': 100,
 	'{Adjective} {First}': 100,	
 	'{Adjective} {Dwarfname}': 100,	
 }
@@ -21,6 +20,7 @@ grammar['dwarfname'] = {
 	'{First} {Surname}': 100,
 	'{First}-{First} {Surname}': 5,
 }
+
 
 grammar['first'] = {
 	'Bruenor': 	100,
@@ -34,11 +34,11 @@ grammar['first'] = {
 grammar['surname'] = {
 	'{Material}{bodypart}': 100,
 	'{Material}{equipment}': 100,
-	'{Material}{verb}er': 100,
+	'{Material}{verb}er': 500,
 	'{Material}{monster}': 100,
-	'{Adjective}{equipment}': 100,
-	'{Adjective}{bodypart}': 100,
-	'{Equipment}{verb}er': 100,
+	'{Adjective}{equipment}': 300,
+	'{Adjective}{bodypart}': 200,
+	'{Equipment}{verb}er': 200,
 	'{Monster}sbane': 100,
 	'{Monster}slayer': 100,
 	'{Monster}hunter': 100,
@@ -46,7 +46,7 @@ grammar['surname'] = {
 }
 
 grammar['material'] = {
-	"gold": 100, "silver": 100, "bronze": 100, "mithril": 10, "iron": 100, "steel": 100, "oak": 100, 
+	"gold": 100, "silver": 150, "bronze": 100, "mithril": 10, "iron": 100, "steel": 100, "oak": 100, 
 	"rock": 100, "stone": 100, "diamond": 10,
 	"fire": 100, "ice": 80, "wind": 30, "earth": 100,
 }
@@ -64,8 +64,6 @@ grammar['adjective'] = {
 	"swift": 100, "strong": 100, "fat": 100, "stubborn": 100, "thirsty": 100, "sharp": 100, "blunt": 100, 
 	"brave": 100, "angry": 100, "hungry": 100, "happy": 100, "sad": 100, "desperate": 100,
 	"sleepy": 100, "faithful": 100, "faithless": 100, "bold": 100,
-//	"{verb}ing": 300, 
-// 	"craven": 100, 
 	"slumbering": 100,
 	"full": 100,	"empty": 100,
 	"dead": 100, "sick": 100, "broken": 100, "stinky": 100, 
@@ -73,16 +71,16 @@ grammar['adjective'] = {
 }
 
 grammar['epithet'] = {
-	'the {adjective}': 100,
-	'who makes {monster}s {adjective}': 100,
-	'who makes {monster}s {verb}': 100,
+	'the {adjective}': 800,
+	'who makes {monster}s {adjective}': 50,
+	'who makes {monster}s {verb}': 50,
 	'who makes {equipment}s {adjective}': 100,
-	'slayer of {monster}s': 100,
+	'slayer of {monster}s': 200,
 	'bane of {monster}s': 100,
 	'hunter of {monster}s': 100,
 	'seeker of {monster}s': 100,
-	'the {verb}ing {monster}': 100,
-	'slayer of the {adjective} {monster}': 100,
+	'the {verb}ing {monster}': 30,
+	'slayer of the {adjective} {monster}': 20,
 }
 
 grammar['monster'] = {
