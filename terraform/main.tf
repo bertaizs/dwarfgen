@@ -4,7 +4,7 @@ variable "google_root" { default = "d2cznr2f" }
 
 variable "domain" { default	= "beltwaan.net" }
 variable "dns_zone_name" { default = "beltwaan" }
-variable "subdomain" { default = "pakmac" }
+variable "subdomain" { default = "dwarfgen" }
 
 
 provider "google" {
