@@ -32,12 +32,12 @@
 			
 			// show or hides the textarea and the controls for defining custom grammars
 			function showHide() {
-				if( document.getElementById('generator').style.visibility == 'hidden' ) {
-					document.getElementById('generator').style.visibility = 'visible'; 
+				if( document.getElementById('generator').style.display == 'none' ) {
+					document.getElementById('generator').style.display = 'inline'; 
 					document.getElementById('showhide').value='simple mode';
 				}
 				else {
-					document.getElementById('generator').style.visibility = 'hidden'; 
+					document.getElementById('generator').style.display = 'none'; 
 					document.getElementById('showhide').value='advanced mode';
 				}
 			}
@@ -50,25 +50,42 @@
 	<p>
 		In case you ever get into the situation where you <i>desperately</i> need to 
 		generate dwarven names en mass, this is the right tool for you.
-		The tool uses a simple <a href="dwarf.js">grammar</a> template for generating names, 
-		we <a href="https://tvtropes.org/pmwiki/pmwiki.php/Main/LukeNounverber">know the rules</a>
-		of how dwarf names work.
-		You can also modify the grammar to work as custom name generator.
+		The tool is based on a concept called <a href="">formal grammars</a>, where there are a set of rules for generating output strings.
+		By default, we use <a href="dwarf.js">this grammar/ruleset</a> for generating dwarven names.
+	</p>
+	<p>
+		You can customize how this tool works by clicking on the button 'advanced mode', 
+		and you can write your own rules to follow
+		<a href="https://tvtropes.org/pmwiki/pmwiki.php/Main/LukeNounverber">industry standard patterns</a>
+		for fantasy names.
+		You can even use the tool for 
+		generating names for pointed-eared elves - do it at your own peril.
 	</p>
 	
 	<p>Good luck & have fun generating lots of dwarven names! ROCK-AND-STONE!</p>
-	<input type="button" value="give me a random name!" onclick="gen();"/>
+		<input type="button" value="give me a random name!" onclick="gen();"/>
+		<input type="button" onclick="document.getElementById('output').innerHTML = '&nbsp;<br/>';" value="clear output" id="clear">
+		<input type="button" onclick="showHide();" value="advanced mode" id="showhide">
 	<hr/>
+		<div id='output' style="color: blue;">&nbsp;<br/></div>
+	<hr/>
+	
+	<div id="generator" style="display: none;"><br/>
+		<p>
+		This dwarf name generator consists of two parts: 
+		a JavaScript library (<a href="namegen.js">namgen.js</a>) which can generate names based on a formal grammar, and 
+		a <a href="dwarf.js">a formal grammar for generating dwarven names</a>.
+		Feel free to use the library under 
+		<a href="https://www.gnu.org/licenses/gpl-3.0.html">GNU GPL</a>.
+		</p>
+		
+		<p>
+		You can also play with the library and the grammar to generate any names you want.
+		</p>
 
-	<div id='output'>&nbsp;<br/></div>
-	
-	<hr/>
-	
-	<input type="button" onclick="document.getElementById('output').innerHTML = '&nbsp;<br/>';" value="clear output" id="clear">
-	<input type="button" onclick="showHide();" value="advanced mode" id="showhide">
-	<div id="generator" style="visibility: hidden;"><br/>
 		The below grammar (describes as JSON code) describes the ruleset of how 
 		the names are generated:
+		<br/>
 		
 		<textarea id="grammar" cols=80 rows=20></textarea>
 		<br/>
@@ -96,7 +113,9 @@
   "first": {"gon": 1, "lgondol": 1, "losh": 1, "lwar": 1}
 }</pre>
 		</p>
-		
+
+
+
 	</div>
 	
 	<script>
@@ -105,5 +124,12 @@
 		
 		gen();
 	</script>	
+
+<div style="color: lightgray">
+<hr/>
+dwarfgen - from <a href="https://berta.hu">berta.hu</a> - 2019
+</div>
+
+
 </body>
 </html>
